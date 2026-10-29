@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redmi 3S Intelligence Sentinel & Engineering Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #07090e;
+      --bg-secondary: #0d121d;
+      --bg-card: rgba(16, 24, 38, 0.75);
+      --bg-card-hover: rgba(22, 33, 52, 0.85);
+      --border-color: rgba(56, 189, 248, 0.12);
+      --border-accent: rgba(56, 189, 248, 0.35);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #06b6d4;
+      --accent-blue: #38bdf8;
+      --accent-emerald: #10b981;
+      --accent-purple: #a855f7;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --glow-cyan: 0 0 25px rgba(6, 182, 212, 0.25);
+      --glow-emerald: 0 0 25px rgba(16, 185, 129, 0.25);
+      --glow-purple: 0 0 25px rgba(168, 85, 247, 0.25);
+      --font-ui: 'Inter', -apple-system, sans-serif;
+      --font-display: 'Outfit', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.07) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+
+    .container {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 24px 20px 48px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 28px;
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0ea5e9, #a855f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: var(--glow-cyan);
+      position: relative;
+    }
+
+    .brand-logo::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.6), rgba(168, 85, 247, 0.6));
+      z-index: -1;
+      opacity: 0.5;
+      filter: blur(6px);
+    }
+
+    .brand-title h1 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(120deg, #ffffff 40%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-title .badge-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .badge {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .badge-primary {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    .badge-debian {
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--accent-rose);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .badge-live {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pulsing-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 10px var(--accent-emerald);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.8; }
+    }
+
+    .header-metrics {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .metric-pill {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 8px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .metric-pill span.label {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .metric-pill span.val {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* Grid Layout */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 22px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      border-color: var(--border-accent);
+      background: var(--bg-card-hover);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--text-main);
+    }
+
+    .card-title .icon {
+      font-size: 18px;
+    }
+
+    .card-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+    }
+
+    /* Grid Column Spans */
+    .col-4 { grid-column: span 4; }
+    .col-6 { grid-column: span 6; }
+    .col-8 { grid-column: span 8; }
+    .col-12 { grid-column: span 12; }
+
+    /* Overview Highlights */
+    .stat-hero {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .stat-hero .value {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-hero .unit {
+      font-size: 14px;
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.5s ease-out;
+    }
+
+    /* Cores Grid (Snapdragon 430: 8 Cores) */
+    .cores-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .core-tile {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .core-tile.offline {
+      opacity: 0.45;
+      filter: grayscale(0.8);
+    }
+
+    .core-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      font-family: var(--font-mono);
+    }
+
+    .core-id {
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .core-status {
+      font-size: 10px;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .core-status.on {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--accent-emerald);
+    }
+
+    .core-status.off {
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text-dim);
+    }
+
+    .core-freq {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .core-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .core-bar-inner {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+      transition: width 0.4s ease;
+    }
+
+    /* Live Canvas Chart Container */
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      margin-top: 12px;
+      border-radius: 12px;
+      background: rgba(10, 15, 26, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 10px;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Thermal Grid */
+    .thermal-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      max-height: 280px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .thermal-item {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .thermal-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 130px;
+    }
+
+    .thermal-val {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .thermal-cool { color: var(--accent-cyan); }
+    .thermal-warm { color: var(--accent-amber); }
+    .thermal-hot { color: var(--accent-rose); }
+
+    /* Interactive Command Lab */
+    .lab-console {
+      background: #05070c;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8);
+    }
+
+    .console-topbar {
+      background: #090e18;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .console-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .console-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+
+    .target-mode-toggle {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 2px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+    }
+
+    .target-mode-btn {
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .target-mode-btn.active {
+      background: var(--accent-blue);
+      color: #040914;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+
+    .console-body {
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      min-height: 160px;
+      max-height: 260px;
+      overflow-y: auto;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+      word-break: break-all;
+      line-height: 1.6;
+    }
+
+    .console-input-row {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      background: #090e18;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      gap: 12px;
+    }
+
+    .prompt-label {
+      color: var(--accent-emerald);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .console-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: #ffffff;
+    }
+
+    .console-run-btn {
+      background: linear-gradient(135deg, var(--accent-cyan), #0284c7);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-family: var(--font-ui);
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+      transition: all 0.2s;
+    }
+
+    .console-run-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+    }
+
+    /* Quick Action Pills */
+    .quick-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .quick-btn {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quick-btn:hover {
+      border-color: var(--accent-blue);
+      color: #ffffff;
+      background: rgba(56, 189, 248, 0.1);
+    }
+
+    /* Storage & Network Details */
+    .sub-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .sub-stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .sub-stat-row .name {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .sub-stat-row .val {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 36px;
+      padding: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-dim);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    footer a {
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .col-4 { grid-column: span 6; }
+      .col-8 { grid-column: span 12; }
+      .cores-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .col-4, .col-6, .col-8, .col-12 { grid-column: span 12; }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .header-metrics {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .cores-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Top Bar -->
+    <header>
+      <div class="brand-section">
+        <div class="brand-logo">⚡</div>
+        <div class="brand-title">
+          <h1>Redmi 3S Sentinel Lab</h1>
+          <div class="badge-group">
+            <span class="badge badge-primary">Qualcomm MSM8937</span>
+            <span class="badge badge-debian" id="badge-debian">Debian 12 Bookworm</span>
+            <span class="badge badge-live"><span class="pulsing-dot"></span> Live Telemetry</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-metrics">
+        <div class="metric-pill">
+          <span class="label">Host Wi-Fi IP</span>
+          <span class="val" id="val-ip">192.168.0.9</span>
+        </div>
+        <div class="metric-pill">
+          <span class="label">System Uptime</span>
+          <span class="val" id="val-uptime">0h 0m</span>
+        </div>
+        <div class="metric-pill">
+          <span class="label">Active Procs</span>
+          <span class="val" id="val-procs">0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <div class="dashboard-grid">
+
+      <!-- CPU Card -->
+      <div class="card col-8">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">💻</span>
+            <span>Snapdragon 430 Octa-Core Processor</span>
+          </div>
+          <span class="card-badge" id="cpu-load-badge">Load: 0%</span>
+        </div>
+
+        <div class="stat-hero">
+          <span class="value" id="cpu-total-pct" style="color: var(--accent-cyan);">0</span>
+          <span class="unit">% Total Utilization</span>
+        </div>
+
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="cpu-progress-bar" style="width: 0%; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));"></div>
+        </div>
+
+        <div class="cores-grid" id="cores-container">
+          <!-- 8 core tiles generated dynamically -->
+        </div>
+
+        <div class="chart-container">
+          <canvas id="cpuChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Battery & Power Card -->
+      <div class="card col-4">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">🔋</span>
+            <span>Battery & Power Node</span>
+          </div>
+          <span class="card-badge" id="battery-status-badge">Charging</span>
+        </div>
+
+        <div class="stat-hero">
+          <span class="value" id="batt-pct" style="color: var(--accent-emerald);">0</span>
+          <span class="unit">% Capacity</span>
+        </div>
+
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="batt-progress-bar" style="width: 0%; background: linear-gradient(90deg, var(--accent-emerald), var(--accent-cyan));"></div>
+        </div>
+
+        <div class="sub-stats">
+          <div class="sub-stat-row">
+            <span class="name">Battery Voltage</span>
+            <span class="val" id="batt-voltage">0 mV</span>
+          </div>
+          <div class="sub-stat-row">
+            <span class="name">Cell Temperature</span>
+            <span class="val" id="batt-temp">0.0 °C</span>
+          </div>
+          <div class="sub-stat-row">
+            <span class="name">Battery Health</span>
+            <span class="val" id="batt-health">Good</span>
+          </div>
+          <div class="sub-stat-row">
+            <span class="name">Power State</span>
+            <span class="val" id="batt-power-state">USB Powered</span>
+          </div>
+          <div class="sub-stat-row">
+            <span class="name">Charging Controller</span>
+            <span class="val" id="batt-chg-status" style="color: var(--accent-emerald);">Active</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Memory & RAM Card -->
+      <div class="card col-4">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">🧠</span>
+            <span>Memory & ZRAM</span>
+          </div>
+          <span class="card-badge" id="mem-badge">3.0 GB Total</span>
+        </div>
+
+        <div class="stat-hero">
+          <span class="value" id="mem-used-pct" style="color: var(--accent-purple);">0</span>
+          <span class="unit">% RAM Used</span>
+        </div>
+
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="mem-progress-bar" style="width: 0%; background: linear-gradient(90deg, var(--accent-purple), var(--accent-rose));"></div>
+        </div>
+
+        <div class="sub-stats">
+          <div class="sub-stat-row">
+            <span class="name">Used Memory</span>
+            <span class="val" id="mem-used-mb">0 MB</span>
+          </div>
+          <div class="sub-stat-row">
+            <span class="name">Available / Free</span>
+            <span class="val" id="mem-avail-mb">0 MB</span>
+          </div>
+          <div class="sub-stat-row">
+            <span class="name">Cached / Buffers</span>
+            <span class="val" id="mem-cache-mb">0 MB</span>
+          </div>
+          <div class="sub-stat-row">
+            <span class="name">ZRAM Compressed</span>
+            <span class="val" id="mem-swap-mb">0 MB</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Storage Card -->
+      <div class="card col-4">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">💾</span>
+            <span>Flash Storage (eMMC)</span>
+          </div>
+          <span class="card-badge">32GB Flash</span>
+        </div>
+
+        <div id="storage-container">
+          <!-- Dynamic mounts -->
+        </div>
+      </div>
+
+      <!-- Network Card -->
+      <div class="card col-4">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">📡</span>
+            <span>Wireless Network (wlan0)</span>
+          </div>
+          <span class="card-badge" id="net-iface-badge">wlan0</span>
+        </div>
+
+        <div class="sub-stats">
+          <div class="sub-stat-row">
+            <span class="name">Download Rate (RX)</span>
+            <span class="val" id="net-rx-rate" style="color: var(--accent-cyan);">0.0 KB/s</span>
+          </div>
+          <div class="sub-stat-row">
+            <span class="name">Upload Rate (TX)</span>
+            <span class="val" id="net-tx-rate" style="color: var(--accent-purple);">0.0 KB/s</span>
+          </div>
+          <div class="sub-stat-row">
+            <span class="name">Total Received</span>
+            <span class="val" id="net-rx-total">0 MB</span>
+          </div>
+          <div class="sub-stat-row">
+            <span class="name">Total Transmitted</span>
+            <span class="val" id="net-tx-total">0 MB</span>
+          </div>
+          <div class="sub-stat-row">
+            <span class="name">SSH Gateway</span>
+            <span class="val" style="color: var(--accent-emerald);">Port 8022 (Active)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thermals Card -->
+      <div class="card col-6">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">🔥</span>
+            <span>Qualcomm TSENS Hardware Thermals</span>
+          </div>
+          <span class="card-badge">Real-time Zones</span>
+        </div>
+
+        <div class="thermal-list" id="thermals-container">
+          <!-- Populated dynamically -->
+        </div>
+
+        <div class="chart-container" style="height: 150px; margin-top: 14px;">
+          <canvas id="thermalChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Interactive Linux Lab & Debian Console -->
+      <div class="card col-6">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">🧪</span>
+            <span>Linux Engineering Lab Console</span>
+          </div>
+          <div class="target-mode-toggle">
+            <button class="target-mode-btn active" id="btn-mode-debian" onclick="setExecMode(true)">Debian 12</button>
+            <button class="target-mode-btn" id="btn-mode-termux" onclick="setExecMode(false)">Termux Host</button>
+          </div>
+        </div>
+
+        <div class="lab-console">
+          <div class="console-topbar">
+            <div class="console-dots">
+              <span class="console-dot dot-red"></span>
+              <span class="console-dot dot-yellow"></span>
+              <span class="console-dot dot-green"></span>
+            </div>
+            <span style="font-size: 11px; font-family: var(--font-mono); color: var(--text-dim);" id="console-context">root@redmi3s-debian:~#</span>
+          </div>
+
+          <div class="console-body" id="console-output">Welcome to the Redmi 3S Linux Engineering Lab!
+Debian GNU/Linux 12 (bookworm) aarch64 userspace is active.
+Type any Linux command below or tap a quick chip to test.
+</div>
+
+          <div class="console-input-row">
+            <span class="prompt-label" id="console-prompt">#</span>
+            <input type="text" class="console-input" id="console-cmd" placeholder="Enter shell command (e.g. uname -a, git --version, df -h)..." onkeydown="handleInputKey(event)">
+            <button class="console-run-btn" onclick="executeCommand()">Run</button>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <button class="quick-btn" onclick="runPreset('cat /etc/os-release')">os-release</button>
+          <button class="quick-btn" onclick="runPreset('lscpu || uname -m')">lscpu</button>
+          <button class="quick-btn" onclick="runPreset('free -h')">free -h</button>
+          <button class="quick-btn" onclick="runPreset('git --version')">git ver</button>
+          <button class="quick-btn" onclick="runPreset('ps aux | head -n 12')">ps aux</button>
+          <button class="quick-btn" onclick="runPreset('uptime')">uptime</button>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      Redmi 3S (land) Snapdragon 430 &bull; Running Debian 12 Bookworm Userspace &bull; SSH on port 8022 (<span style="color: var(--accent-cyan);">ssh -p 8022 192.168.0.9</span>)
+    </footer>
+  </div>
+
+  <script>
+    let execInDebian = true;
+    const cpuHistory = [];
+    const tempHistory = [];
+    const maxHistoryPoints = 40;
+
+    function setExecMode(inDebian) {
+      execInDebian = inDebian;
+      document.getElementById('btn-mode-debian').classList.toggle('active', inDebian);
+      document.getElementById('btn-mode-termux').classList.toggle('active', !inDebian);
+      document.getElementById('console-context').innerText = inDebian ? 'root@redmi3s-debian:~#' : 'u0_a48@localhost:~$';
+      document.getElementById('console-prompt').innerText = inDebian ? '#' : '$';
+    }
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 B';
+      const k = 1024;
+      const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return (bytes / Math.pow(k, i)).toFixed(1) + ' ' + sizes[i];
+    }
+
+    // Canvas CPU Chart
+    const cpuCanvas = document.getElementById('cpuChart');
+    const cpuCtx = cpuCanvas.getContext('2d');
+    function resizeCanvas(canvas) {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * window.devicePixelRatio;
+      canvas.height = rect.height * window.devicePixelRatio;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+    window.addEventListener('resize', () => {
+      resizeCanvas(cpuCanvas);
+      resizeCanvas(thermalCanvas);
+    });
+
+    const thermalCanvas = document.getElementById('thermalChart');
+    const thermalCtx = thermalCanvas.getContext('2d');
+
+    function drawChart(canvas, ctx, dataSeries, color, fillColor, maxVal = 100, unit = '%') {
+      const rect = canvas.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
+      ctx.clearRect(0, 0, w, h);
+
+      if (dataSeries.length < 2) return;
+
+      // Draw grid lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.lineWidth = 1;
+      for (let y = 0; y <= h; y += h / 4) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+
+      // Draw line
+      ctx.beginPath();
+      const step = w / (maxHistoryPoints - 1);
+      const startIdx = Math.max(0, maxHistoryPoints - dataSeries.length);
+
+      for (let i = 0; i < dataSeries.length; i++) {
+        const x = (startIdx + i) * step;
+        const val = Math.max(0, Math.min(maxVal, dataSeries[i]));
+        const y = h - (val / maxVal) * (h - 20) - 10;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // Draw fill
+      ctx.lineTo(w, h);
+      ctx.lineTo(startIdx * step, h);
+      ctx.closePath();
+      ctx.fillStyle = fillColor;
+      ctx.fill();
+
+      // Draw current value tag
+      const latestVal = dataSeries[dataSeries.length - 1];
+      ctx.fillStyle = color;
+      ctx.font = '600 11px JetBrains Mono';
+      ctx.fillText(`${latestVal.toFixed(1)}${unit}`, w - 45, 18);
+    }
+
+    async function fetchTelemetry() {
+      try {
+        const res = await fetch('/api/telemetry');
+        if (!res.ok) return;
+        const data = await res.json();
+        updateUI(data);
+      } catch (e) {
+        console.error('Telemetry fetch error:', e);
+      }
+    }
+
+    function updateUI(data) {
+      // System & Header
+      document.getElementById('val-ip').innerText = data.network.ip;
+      document.getElementById('val-uptime').innerText = data.system.uptime_formatted;
+      document.getElementById('val-procs').innerText = data.system.process_count;
+
+      if (data.system.debian.installed) {
+        document.getElementById('badge-debian').innerText = `Debian ${data.system.debian.version}`;
+      }
+
+      // CPU Total
+      const cpuPct = data.cpu.total_load_pct;
+      document.getElementById('cpu-total-pct').innerText = cpuPct.toFixed(1);
+      document.getElementById('cpu-progress-bar').style.width = `${cpuPct}%`;
+      document.getElementById('cpu-load-badge').innerText = `Load: ${cpuPct.toFixed(1)}% (1m: ${data.cpu.load_avg[0]})`;
+
+      cpuHistory.push(cpuPct);
+      if (cpuHistory.length > maxHistoryPoints) cpuHistory.shift();
+      drawChart(cpuCanvas, cpuCtx, cpuHistory, '#06b6d4', 'rgba(6, 182, 212, 0.15)', 100, '%');
+
+      // Cores Grid
+      const coresContainer = document.getElementById('cores-container');
+      coresContainer.innerHTML = '';
+      data.cpu.cores.forEach(c => {
+        const tile = document.createElement('div');
+        tile.className = `core-tile ${c.online ? '' : 'offline'}`;
+        tile.innerHTML = `
+          <div class="core-header">
+            <span class="core-id">CORE ${c.id}</span>
+            <span class="core-status ${c.online ? 'on' : 'off'}">${c.online ? 'ONLINE' : 'HOTPLUG'}</span>
+          </div>
+          <div class="core-freq">${c.online ? `${c.freq_mhz} MHz` : '0 MHz (Sleep)'}</div>
+          <div class="core-bar">
+            <div class="core-bar-inner" style="width: ${c.online ? c.load_pct : 0}%;"></div>
+          </div>
+        `;
+        coresContainer.appendChild(tile);
+      });
+
+      // Battery
+      const b = data.battery;
+      document.getElementById('batt-pct').innerText = b.capacity_pct;
+      document.getElementById('batt-progress-bar').style.width = `${b.capacity_pct}%`;
+      document.getElementById('battery-status-badge').innerText = b.status;
+      document.getElementById('batt-voltage').innerText = `${b.voltage_mv} mV`;
+      document.getElementById('batt-temp').innerText = `${b.temp_c} °C`;
+      document.getElementById('batt-health').innerText = b.health;
+      document.getElementById('batt-power-state').innerText = b.charging ? 'USB Charging' : 'Discharging';
+
+      // Memory
+      const m = data.memory;
+      document.getElementById('mem-used-pct').innerText = m.used_pct.toFixed(1);
+      document.getElementById('mem-progress-bar').style.width = `${m.used_pct}%`;
+      document.getElementById('mem-used-mb').innerText = formatBytes(m.used_bytes);
+      document.getElementById('mem-avail-mb').innerText = formatBytes(m.avail_bytes);
+      document.getElementById('mem-cache-mb').innerText = formatBytes(m.cached_bytes + m.buffers_bytes);
+      document.getElementById('mem-swap-mb').innerText = `${formatBytes(m.swap_used_bytes)} / ${formatBytes(m.swap_total_bytes)}`;
+
+      // Storage
+      const storageContainer = document.getElementById('storage-container');
+      storageContainer.innerHTML = '';
+      data.storage.forEach(s => {
+        const item = document.createElement('div');
+        item.style.marginBottom = '14px';
+        item.innerHTML = `
+          <div class="sub-stat-row" style="margin-bottom: 4px;">
+            <span class="name">${s.mount} Partition</span>
+            <span class="val">${formatBytes(s.free_bytes)} Free (${s.used_pct}%)</span>
+          </div>
+          <div class="progress-bar-bg" style="height: 6px; margin-bottom: 0;">
+            <div class="progress-bar-fill" style="width: ${s.used_pct}%; background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));"></div>
+          </div>
+        `;
+        storageContainer.appendChild(item);
+      });
+
+      // Network
+      const net = data.network;
+      document.getElementById('net-rx-rate').innerText = `${net.rx_speed_kbps.toFixed(1)} KB/s`;
+      document.getElementById('net-tx-rate').innerText = `${net.tx_speed_kbps.toFixed(1)} KB/s`;
+      document.getElementById('net-rx-total').innerText = formatBytes(net.rx_bytes);
+      document.getElementById('net-tx-total').innerText = formatBytes(net.tx_bytes);
+
+      // Thermals
+      const thermContainer = document.getElementById('thermals-container');
+      thermContainer.innerHTML = '';
+      let avgTemp = 0;
+      let tempCount = 0;
+
+      data.thermals.forEach(t => {
+        if (t.temp_c > 0 && t.temp_c < 110) {
+          avgTemp += t.temp_c;
+          tempCount++;
+          const tempClass = t.temp_c > 45 ? 'thermal-hot' : (t.temp_c > 35 ? 'thermal-warm' : 'thermal-cool');
+          const item = document.createElement('div');
+          item.className = 'thermal-item';
+          item.innerHTML = `
+            <span class="thermal-name" title="${t.label} (${t.type})">${t.label}</span>
+            <span class="thermal-val ${tempClass}">${t.temp_c.toFixed(1)}°C</span>
+          `;
+          thermContainer.appendChild(item);
+        }
+      });
+
+      if (tempCount > 0) {
+        const currAvg = avgTemp / tempCount;
+        tempHistory.push(currAvg);
+        if (tempHistory.length > maxHistoryPoints) tempHistory.shift();
+        drawChart(thermalCanvas, thermalCtx, tempHistory, '#f59e0b', 'rgba(245, 158, 11, 0.15)', 70, '°C');
+      }
+    }
+
+    // Command Execution
+    async function executeCommand() {
+      const input = document.getElementById('console-cmd');
+      const cmd = input.value.trim();
+      if (!cmd) return;
+
+      const consoleOutput = document.getElementById('console-output');
+      const promptPrefix = execInDebian ? 'root@redmi3s-debian:~# ' : 'u0_a48@localhost:~$ ';
+      consoleOutput.innerText += `\n${promptPrefix}${cmd}\n[Running...]`;
+      consoleOutput.scrollTop = consoleOutput.scrollHeight;
+      input.value = '';
+
+      try {
+        const res = await fetch('/api/exec', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ cmd: cmd, debian: execInDebian })
+        });
+        const resp = await jsonSafe(res);
+        if (resp.error) {
+          consoleOutput.innerText += `\nError: ${resp.error}\n`;
+        } else {
+          let output = resp.stdout;
+          if (resp.stderr) output += (output ? '\n' : '') + resp.stderr;
+          if (!output) output = '(command finished with no output)';
+          consoleOutput.innerText += `\n${output}\n(exit code: ${resp.exit_code}, ${resp.duration_sec}s)\n`;
+        }
+      } catch (err) {
+        consoleOutput.innerText += `\nFailed to send command: ${err}\n`;
+      }
+      consoleOutput.scrollTop = consoleOutput.scrollHeight;
+    }
+
+    async function jsonSafe(res) {
+      try {
+        return await res.json();
+      } catch (e) {
+        return { error: 'Invalid response from server' };
+      }
+    }
+
+    function runPreset(cmd) {
+      document.getElementById('console-cmd').value = cmd;
+      executeCommand();
+    }
+
+    function handleInputKey(e) {
+      if (e.key === 'Enter') {
+        executeCommand();
+      }
+    }
+
+    // Startup
+    window.addEventListener('load', () => {
+      resizeCanvas(cpuCanvas);
+      resizeCanvas(thermalCanvas);
+      fetchTelemetry();
+      setInterval(fetchTelemetry, 1500);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Logs & Temp
+*.log
+*.tmp
+*.tar
+*.tar.xz
+*.tar.gz
+
+# IDE & OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Local SSH keys
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
